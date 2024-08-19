@@ -1,13 +1,13 @@
 # Related-Posts
 
-**Contributors:** Bappi
-**Tags:** Related, posts, tags, related-post
-**Requires at least:** 5.0
-**Tested up to:** 6.6
-**Stable tag:** 1.0.0
-**Requires PHP:** 7.4
-**License:** GPLv2 or later
-**License URI:** https://www.gnu.org/licenses/gpl-2.0.html
+**Contributors:** Bappi  
+**Tags:** Related, posts, tags, related-post  
+**Requires at least:** 5.0  
+**Tested up to:** 6.6  
+**Stable tag:** 1.0.0  
+**Requires PHP:** 7.4  
+**License:** GPLv2 or later  
+**License URI:** [GPLv2 License](https://www.gnu.org/licenses/gpl-2.0.html)
 
 ### Short Description 
 Display related posts based on shared categories and tags to enhance user engagement and navigation on your WordPress site.
@@ -50,7 +50,7 @@ chosen based on the categories and tags associated with the current post.
 
 ### Customization
 
-- **Styling:** The plugin comes with a default stylesheet located in `assets/css/related-posts.css`. You can customize
+- **Styling:** The plugin comes with a default stylesheet located in `assets/css/style.css`. You can customize
   the look and feel by adding your own CSS to your theme’s stylesheet or using the Customizer.
 - **Number of Posts:** By default, the plugin displays up to 5 related posts. This can be modified by editing the
   plugin’s settings or code.
