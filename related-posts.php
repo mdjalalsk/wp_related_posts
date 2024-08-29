@@ -28,7 +28,9 @@ You should have received a copy of the GNU General Public License
 along with Related-Posts. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
 
-defined('ABSPATH') || exit;
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
+}
 //include class.
 require_once __DIR__ . '/includes/class-related-posts.php';
 

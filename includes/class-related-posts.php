@@ -7,6 +7,10 @@
  *
  * @since 1.0.0
  */
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
+}
+
 class Related_Posts {
 
     /**
@@ -54,7 +58,7 @@ class Related_Posts {
      */
     public function define_constant() {
         define('RP_VERSION', $this->version);
-        define('RP_PLUGIN_DIR', plugin_dir_path($this->file));
+        define('RP_PLUGIN_DIR', __DIR__);
         define('RP_PLUGIN_URL', plugin_dir_url($this->file));
         define('RP_PLUGIN_BASENAME', plugin_basename($this->file));
     }
@@ -108,14 +112,17 @@ class Related_Posts {
     public function load_textdomain() {
         load_plugin_textdomain('related-posts', false, dirname(plugin_basename($this->file)) . '/languages');
     }
+
     /**
      * Enqueue plugin styles.
+     *
+     * Enqueues the CSS styles for the related posts.
      *
      * @since 1.0.0
      * @return void
      */
     public function enqueue_styles() {
-        wp_enqueue_style('related-posts-style', RP_PLUGIN_URL . './assets/css/style.css', array(), RP_VERSION);
+        wp_enqueue_style('related-posts-style', RP_PLUGIN_URL . 'assets/css/style.css', array(), RP_VERSION);
     }
 
     /**
@@ -155,6 +162,9 @@ class Related_Posts {
             echo '</ul>';
             wp_reset_postdata();
             $content .= ob_get_clean();
+        } else {
+            // Optionally, handle cases where no related posts are found.
+            $content .= '<p>' . esc_html__('No related posts found.', 'related-posts') . '</p>';
         }
         return $content;
     }
@@ -180,7 +190,7 @@ class Related_Posts {
             'category__in'        => $categories,
             'post__not_in'        => [$post_id],
             'posts_per_page'      => 5,
-            'orderby'             => 'rand',
+            'orderby'             => 'date', // Sorting by date as a more efficient method
             'ignore_sticky_posts' => true
         ];
 
@@ -205,6 +215,7 @@ class Related_Posts {
         $post_author = get_the_author();
         $post_content = get_the_content();
         $post_content_trimmed = wp_trim_words($post_content, 20, '...');
+
         echo '<li class="related-post-card">';
         echo '<a href="' . esc_url($post_permalink) . '" title="' . esc_attr($post_title) . '" class="related-post-link">';
 
@@ -214,16 +225,14 @@ class Related_Posts {
 
         echo '<div class="related-post-content">';
         echo '<h4 class="related-post-title">' . esc_html($post_title) . '</h4>';
-        echo '<p>'.esc_html($post_content_trimmed).'</p>';
+        echo '<p>' . esc_html($post_content_trimmed) . '</p>';
         echo '<p class="related-post-meta">';
         echo '<span class="related-post-date">' . esc_html($post_date) . '</span>';
-        echo 'by <span class="related-post-author">' . esc_html($post_author) . '</span>';
-        echo '<p>';
+        echo ' by <span class="related-post-author">' . esc_html($post_author) . '</span>';
+        echo '</p>';
         echo '</div>';
         echo '</a>';
         echo '</li>';
     }
 
 }
-
-
